@@ -1,9 +1,44 @@
 import React from "react";
 import Lottie from "lottie-react";
 import Donation from "../../assets/donation.json";
+import useAxios from "../../hooks/useAxios";
 const AddFood = () => {
+  const axios = useAxios();
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.target;
+    // const email = users?.email;
+    // const user_photo = users?.photoURL;
+    // const user_name = users?.displayName;
+    const email = "likhon@gmail.com";
+    const user_photo = "dklsafjdsf";
+    const user_name = "Likhon";
+    const status = form.status.value;
+    const category = form.food_category.value;
+    const additional_notes = form.notes.value;
+    const expire_date = form.expire.value;
+    const location = form.location.value;
+    const quantity = form.quantity.value;
+    const food_name = form.food_name.value;
+    const food_photo = form.food_photo.value;
+    const submitInfo = {
+      user_name,
+      user_photo,
+      status,
+      additional_notes,
+      expire_date,
+      location,
+      quantity,
+      name: food_name,
+      image: food_photo,
+      category,
+    };
+    axios.post("/food", submitInfo).then((data) => {
+      if (data.data.affectedRows) {
+        console.log(data.data);
+        form.reset();
+      }
+    });
   };
   return (
     <div className=" my-24 min-h-screen flex flex-col lg:flex-row justify-between items-center gap-20 mx-20">
@@ -33,6 +68,18 @@ const AddFood = () => {
               type="text"
               placeholder="Food Photo"
               name="food_photo"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="text-white">Food Category</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Food Category"
+              name="food_category"
               className="input input-bordered"
               required
             />
@@ -95,6 +142,7 @@ const AddFood = () => {
               name="status"
               defaultValue="Available"
               className="input input-bordered"
+              readOnly
               required
             />
           </div>

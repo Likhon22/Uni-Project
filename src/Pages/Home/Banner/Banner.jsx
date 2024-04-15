@@ -1,27 +1,39 @@
 import { Link } from "react-router-dom";
-import banner from "../../../assets/banner.jpg";
+import banner from "../../../assets/donation.jpg";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+
+import Container from "./../../../Components/Container";
 
 const Banner = () => {
   return (
-    <div className="relative">
-      <img className=" h-[800px] w-full" src={banner} alt="" />
-      <div className="absolute bg-black   w-full bottom-0 top-0 bg-opacity-50    flex items-center justify-center    px-4 hover:w-full">
-        <div>
-          <h2 className=" text-xl md:text-2xl lg:text-4xl text-cyan-400 font-medium uppercase text-center mb-4  ">
-            Fight against hunger donate food today
-          </h2>
-          <h2 className="text-4xl md:text-5xl lg:text-8xl font-extrabold text-white text-center">
-            Build a Beautiful World
-          </h2>
-          <div className=" text-center">
-            <Link to="/add">
-              <button className="btn btn-accent rounded-full mt-8 text-white">
-                Donate Now
-              </button>
-            </Link>
+    <div className="bg-[#F9FAFB]">
+      <Container>
+        {" "}
+        <div className="flex pt-24 items-center justify-center gap-14">
+          <div className="flex-1">
+            <h2 className="text-[#fb8300] font-bold text-4xl">Be The Reason</h2>
+            <h3 className="font-bold text-4xl text-blue-950 mt-4">
+              Someone Smiles Today!
+            </h3>
+            <p className="my-10">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi,
+              quaerat error doloremque sit quia, a consequuntur unde, provident
+              at ipsa laudantium assumenda quo dolore ex dignissimos eos iure
+              tenetur illo? Totam a aliquam fuga adipisci deleniti iure repellat
+              inventore soluta modi ut ex libero sint alias excepturi blanditiis
+              voluptatum, voluptatem beatae eos illum expedita quas et sit
+              cumque asperiores? Ratione!
+            </p>
+            <button className="btn bg-blue-950 rounded-full text-white border-none hover:bg-blue-900">
+              Donate Now{" "}
+              <FaArrowAltCircleRight className="text-xl "></FaArrowAltCircleRight>
+            </button>
+          </div>
+          <div className="flex-1">
+            <img src={banner} alt="" />
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };
