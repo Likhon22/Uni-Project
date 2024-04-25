@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import Lottie from "lottie-react";
-import Donation from "../../assets/donation.json";
-import useAxios from "../../hooks/useAxios";
-import useAuth from "../../hooks/useAuth";
-import { uploadImage } from "../../Utilis/imagebb";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import DashboardContainer from "../../../Components/DashboardContainer";
+import useAuth from "../../../hooks/useAuth";
+import useAxios from "../../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { uploadImage } from "../../../Utilis/imagebb";
 import toast from "react-hot-toast";
-import DashboardContainer from "../../Components/DashboardContainer";
-import { useNavigate } from "react-router-dom";
-const AddFood = () => {
-  const axios = useAxios();
-  const navigate = useNavigate();
 
-  const { user } = useAuth();
+const UpdateFood = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
-
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const axios = useAxios();
   const { data: foods = [] } = useQuery({
     queryKey: ["foods", selectedCategory],
     queryFn: async () => {
@@ -23,14 +20,16 @@ const AddFood = () => {
     },
   });
 
+  const food = useLoaderData();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
-    const email = user?.email;
-    const user_name = user?.username;
-    const user_photo = user?.userImage;
-    const status = form.status.value;
+    // const email = food?.data?.email;
+    // const user_name = food?.data?.user_name;
+    // const user_photo = food?.data?.user_photo;
+    // const status = food?.data?.status;
     const category = selectedCategory.toLowerCase();
     const additional_notes = form.notes.value;
     const expire_date = form.expire.value;
@@ -40,8 +39,6 @@ const AddFood = () => {
     const imageForm = form.image.files[0];
 
     const imageData = await uploadImage(imageForm);
-    console.log(imageData);
-    console.log(category);
 
     const food_photo = imageData?.data?.display_url;
     const filteredCategoryImage = foods.find((food) =>
@@ -53,34 +50,28 @@ const AddFood = () => {
     if (filteredCategoryImage) {
       category_image = filteredCategoryImage.category_image;
     }
-    console.log(category_image, category);
-    const submitInfo = {
-      email,
-      user_name,
-      user_photo,
-      status,
+    const updateInfo = {
+      category,
       additional_notes,
       expire_date,
       location,
       quantity,
       food_name,
       food_photo,
-      category,
       category_image,
     };
-
-    axios.post("/foods", submitInfo).then((data) => {
-      if (data.data.affectedRows) {
-        console.log(data.data);
-        toast.success("Added to the foods");
-        navigate("/dashboard/manage-added-foods");
-        form.reset();
-      }
-    });
+    try {
+      const response = await axios.put(`/foods/${food?.data?.id}`, updateInfo);
+      console.log(response);
+      toast.success("Updated successfully");
+      navigate("/dashboard/manage-added-foods");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <DashboardContainer>
-      <div className=" min-h-screen flex flex-col lg:flex-row justify-between items-center gap-20 ">
+      <div className=" min-h-screen flex flex-col lg:flex-row justify-center items-center gap-20 ">
         <div className="bg-gradient-to-r from-cyan-500 to-blue-500  w-1/2 mx-auto py-20 rounded-lg">
           <h2 className="text-center text-white text-4xl font-bold mb-4">
             {" "}
@@ -92,6 +83,7 @@ const AddFood = () => {
                 <span className="text-white">Food Name</span>
               </label>
               <input
+                defaultValue={food?.data?.food_name}
                 type="text"
                 placeholder=" Food Name"
                 name="food_name"
@@ -138,11 +130,12 @@ const AddFood = () => {
                 <span className="text-white">Food Quantity</span>
               </label>
               <input
+                defaultValue={food?.data?.quantity}
                 type="number"
                 placeholder="Food Quantity"
+                min={1}
                 name="quantity"
                 className="input input-bordered"
-                min={1}
                 required
               />
             </div>
@@ -151,6 +144,7 @@ const AddFood = () => {
                 <span className="text-white">Pickup Location</span>
               </label>
               <input
+                defaultValue={food?.data?.location}
                 type="text"
                 placeholder="Pickup Location"
                 name="location"
@@ -163,6 +157,7 @@ const AddFood = () => {
                 <span className="text-white">Expire Date</span>
               </label>
               <input
+                defaultValue={food?.data?.expire_date}
                 type="number"
                 placeholder="Expire Date"
                 name="expire"
@@ -176,6 +171,7 @@ const AddFood = () => {
                 <span className="text-white">Additional Notes</span>
               </label>
               <input
+                defaultValue={food?.data?.notes}
                 type="text"
                 placeholder="Additional Notes"
                 className="input input-bordered"
@@ -191,7 +187,7 @@ const AddFood = () => {
                 type="text"
                 placeholder="Status"
                 name="status"
-                defaultValue="Available"
+                defaultValue={food?.data?.status}
                 className="input input-bordered"
                 readOnly
                 required
@@ -203,10 +199,10 @@ const AddFood = () => {
                 <span className="text-white">Your Email</span>
               </label>
               <input
+                defaultValue={food?.data?.email}
                 type="text"
                 placeholder="Your Email"
                 name="email"
-                defaultValue={user?.email}
                 className="input input-bordered"
                 readOnly
                 required
@@ -217,10 +213,10 @@ const AddFood = () => {
                 <span className="text-white">Your Name</span>
               </label>
               <input
+                defaultValue={food?.data?.user_name}
                 type="text"
                 placeholder="Your Name"
                 name="name"
-                defaultValue={user?.username}
                 className="input input-bordered"
                 readOnly
                 required
@@ -231,17 +227,14 @@ const AddFood = () => {
                 type="submit"
                 className="btn btn-primary bg-gradient-to-r from-blue-600 to-cyan-600 text-white border-none"
               >
-                Add Food
+                Update Food
               </button>
             </div>
           </form>
-        </div>
-        <div className="w-1/2">
-          <Lottie animationData={Donation} loop={false}></Lottie>
         </div>
       </div>
     </DashboardContainer>
   );
 };
 
-export default AddFood;
+export default UpdateFood;

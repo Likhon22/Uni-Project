@@ -1,9 +1,38 @@
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "./../../hooks/useAuth";
+import toast from "react-hot-toast";
+import useAxios from "../../hooks/useAxios";
 
 const Login = () => {
-  const [toogle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
+  const { login, loginEmailError, loginPasswordError } = useAuth();
+  const axios = useAxios();
+  const location = useLocation();
+  console.log(location);
+  const to = location?.state?.from?.pathname || "/";
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const res = await axios.get(`/users/${email}`);
+
+    const username = res?.data?.username;
+    const userImage = res?.data?.userImage;
+    const role = res?.data?.role;
+
+    const password = form.password.value;
+
+    await login(email, password, username, userImage, role).then((data) => {
+      if (data) {
+        toast.success("Login Successfully");
+        navigate(to, { replace: true });
+      }
+    });
+  };
 
   return (
     <div className="md:w-3/5 mx-4 md:mx-auto items-center mt-20 py-16 bg-cyan-400 rounded-xl">
@@ -14,7 +43,7 @@ const Login = () => {
           </h1>
         </div>
         <div className="card md:w-3/4   lg:w-1/2   shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleLogin}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -27,36 +56,36 @@ const Login = () => {
                 required
               />
             </div>
+            {loginEmailError && (
+              <p className=" text-red-500 ml-3">{loginEmailError}</p>
+            )}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <div className="flex items-center relative">
                 <input
-                  type={toogle ? "text" : "password"}
+                  type={toggle ? "text" : "password"}
                   placeholder="password"
                   name="password"
                   className="input input-bordered w-full"
                   required
                 />
-                {toogle ? (
+                {toggle ? (
                   <AiOutlineEyeInvisible
-                    onClick={() => setToggle(!toogle)}
+                    onClick={() => setToggle(!toggle)}
                     className="relative right-6 cursor-pointer"
                   ></AiOutlineEyeInvisible>
                 ) : (
                   <AiOutlineEye
-                    onClick={() => setToggle(!toogle)}
+                    onClick={() => setToggle(!toggle)}
                     className="relative right-6 cursor-pointer"
                   ></AiOutlineEye>
                 )}
               </div>
-
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
+              {loginPasswordError && (
+                <p className=" ml-3 text-red-500">{loginPasswordError}</p>
+              )}
             </div>
             <div className="form-control mt-3">
               <button

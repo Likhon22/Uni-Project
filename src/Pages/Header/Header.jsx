@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "../../assets/logo.png";
+
 import Container from "../../Components/Container";
+import useAuth from "../../hooks/useAuth";
+import HeaderModal from "../../Components/Modal/HeaderModal/HeaderModal";
+import useRole from "../../hooks/useRole";
 
 const Header = () => {
+  const { user } = useAuth();
+  const [role] = useRole();
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   const navLinks = (
     <>
       <li>
@@ -13,18 +24,24 @@ const Header = () => {
         <NavLink to="/available">Available Foods</NavLink>
       </li>
       <li>
-        <NavLink to="/add-food">Add Food</NavLink>
+        {user && role === "user" && (
+          <NavLink to={"/dashboard/user-profile"}>Dashboard</NavLink>
+        )}
+        {user && role === "donor" && (
+          <NavLink to={"/dashboard/donor-profile"}>Dashboard</NavLink>
+        )}
+        {user && role === "admin" && (
+          <NavLink to={"/dashboard/admin-profile"}>Dashboard</NavLink>
+        )}
       </li>
+
       <li>
-        <NavLink to="/manage">Manage My Foods</NavLink>
-      </li>
-      <li>
-        <NavLink to="/request">My Food Request</NavLink>
+        <NavLink to="/chatbot">Chatbot</NavLink>
       </li>
     </>
   );
   return (
-    <div className="bg-cyan-300 text-white">
+    <div className="bg-cyan-400 text-white">
       <Container>
         <nav className="navbar   ">
           <div className="navbar-start ">
@@ -52,10 +69,12 @@ const Header = () => {
                 {navLinks}
               </ul>
             </div>
-            <div className="flex flex-col items-center">
-              <p className="text-[#fb8300] font-bold text-3xl">Zero</p>
-              <p className="text-blue-950 font-medium">Hunger</p>
-            </div>
+            <Link to={"/"}>
+              <div className="flex flex-col items-center cursor-pointer bg-black p-3  bg-opacity-40 rounded-full hover:bg-opacity-60">
+                <p className="text-[#fb8300] font-bold text-3xl">Zero</p>
+                <p className="text-white font-medium">Hunger</p>
+              </div>
+            </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 text-lg gap-2 text-blue-950 py-4">
@@ -63,21 +82,32 @@ const Header = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <div>
-              <Link to="/login">
-                <button className="btn">Login</button>
+            {!user ? (
+              <Link to={"/login"}>
+                <button className="btn bg-third text-second border-none">
+                  Login
+                </button>
               </Link>
-            </div>
-
-            {/* <div className="flex items-center gap-5">
-          <div className="flex flex-col justify-center items-center">
-            <img className="w-[60px] h-[60px] rounded-full" src="" alt="" />
-            <h2 className="text-white font-medium">{users?.displayName}</h2>
-          </div>
-          <button className="btn">Logout</button> */}
-            {/* </div> */}
+            ) : (
+              <div className="flex items-center gap-6">
+                {/* Open the modal using document.getElementById('ID').showModal() method */}
+                {user?.userImage ? (
+                  <div className="">
+                    <img
+                      onClick={() => setIsOpen(true)}
+                      className="w-[40px] h-[40px] rounded-full cursor-pointer"
+                      src={user?.userImage}
+                      alt=""
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            )}
           </div>
         </nav>
+        <HeaderModal isOpen={isOpen} closeModal={closeModal}></HeaderModal>
       </Container>
     </div>
   );

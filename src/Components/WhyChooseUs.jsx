@@ -21,7 +21,7 @@ const WhyChooseUs = () => {
           <Swiper
             slidesPerView={2}
             spaceBetween={80}
-            centeredSlides={true}
+            centeredSlides={false}
             pagination={{
               clickable: true,
             }}

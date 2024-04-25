@@ -1,9 +1,35 @@
 import React from "react";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import useAuth from "./../../hooks/useAuth";
+import toast from "react-hot-toast";
 const Register = () => {
-  const [toogle, setToggle] = useState(false);
+  const { register, error, logout } = useAuth();
+  const navigate = useNavigate();
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const name = form.name.value;
+    const userImage = "https://i.ibb.co/5cxvxkf/userr.jpg";
+    const role = "user";
+
+    await register(name, email, userImage, password, role).then(
+      async (data) => {
+        if (data?.message) {
+          toast.success(`Register successfully`);
+          await logout();
+          navigate("/login");
+        } else {
+          toast.error(`${error}`);
+        }
+      }
+    );
+  };
+  const [toggle, setToggle] = useState(false);
   return (
     <div className="md:w-3/5 mx-4 md:mx-auto items-center my-20 py-16 bg-cyan-400 rounded-xl">
       <div className="hero-content flex-col ">
@@ -13,7 +39,7 @@ const Register = () => {
           </h1>
         </div>
         <div className="card md:w-3/4  lg:w-1/2  shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleRegister}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -26,18 +52,7 @@ const Register = () => {
                 required
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Photo Url</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Your Photo"
-                name="photo"
-                className="input input-bordered"
-                required
-              />
-            </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -57,20 +72,20 @@ const Register = () => {
 
               <div className="flex items-center relative">
                 <input
-                  type={toogle ? "text" : "password"}
+                  type={toggle ? "text" : "password"}
                   placeholder="password"
                   name="password"
                   className="input input-bordered w-full"
                   required
                 />
-                {toogle ? (
+                {toggle ? (
                   <AiOutlineEyeInvisible
-                    onClick={() => setToggle(!toogle)}
+                    onClick={() => setToggle(!toggle)}
                     className="relative right-6 cursor-pointer"
                   ></AiOutlineEyeInvisible>
                 ) : (
                   <AiOutlineEye
-                    onClick={() => setToggle(!toogle)}
+                    onClick={() => setToggle(!toggle)}
                     className="relative right-6 cursor-pointer"
                   ></AiOutlineEye>
                 )}
