@@ -8,7 +8,7 @@ import { uploadImage } from "../../../Utilis/imagebb";
 import toast from "react-hot-toast";
 
 const UpdateFood = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("rice");
   const { user } = useAuth();
   const navigate = useNavigate();
   const axios = useAxios();
@@ -26,10 +26,6 @@ const UpdateFood = () => {
     e.preventDefault();
     const form = e.target;
 
-    // const email = food?.data?.email;
-    // const user_name = food?.data?.user_name;
-    // const user_photo = food?.data?.user_photo;
-    // const status = food?.data?.status;
     const category = selectedCategory.toLowerCase();
     const additional_notes = form.notes.value;
     const expire_date = form.expire.value;
