@@ -25,12 +25,11 @@ const Chatbot = () => {
   });
 
   useEffect(() => {
-    console.log(questionData);
-    const question = questionData.trim().toLowerCase();
-    console.log(question);
-
-    if (question) {
+    if (questionData) {
+      const question = questionData.trim().toLowerCase();
       fetchData(question);
+    } else {
+      setQuestionData("");
     }
   }, [questionData]);
 
@@ -84,7 +83,7 @@ const Chatbot = () => {
                   ""
                 )}
               </div>
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center my-8">
                 <Autocomplete
                   disablePortal
                   onChange={(e, value) => setQuestionData(value)}
