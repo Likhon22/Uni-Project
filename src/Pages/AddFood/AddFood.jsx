@@ -13,7 +13,7 @@ const AddFood = () => {
   const navigate = useNavigate();
 
   const { user } = useAuth();
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("rice");
 
   const { data: foods = [] } = useQuery({
     queryKey: ["foods", selectedCategory],

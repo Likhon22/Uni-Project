@@ -5,6 +5,7 @@ import Container from "../../Components/Container";
 import useAuth from "../../hooks/useAuth";
 import HeaderModal from "../../Components/Modal/HeaderModal/HeaderModal";
 import useRole from "../../hooks/useRole";
+import "../../Components/Dashboard/dashboard.css";
 
 const Header = () => {
   const { user } = useAuth();
@@ -34,7 +35,6 @@ const Header = () => {
           <NavLink to={"/dashboard/admin-profile"}>Dashboard</NavLink>
         )}
       </li>
-
       <li>
         <NavLink to="/chatbot">Chatbot</NavLink>
       </li>
@@ -78,8 +78,8 @@ const Header = () => {
               </div>
             </Link>
           </div>
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1 text-lg gap-2 text-blue-950 py-4">
+          <div className="navbar-center hidden lg:flex" id="menu">
+            <ul className=" menu-horizontal text-lg gap-4 text-blue-950 py-4">
               {navLinks}
             </ul>
           </div>
