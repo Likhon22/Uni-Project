@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-
+import logo from "../../assets/logo.png";
 import Container from "../../Components/Container";
 import useAuth from "../../hooks/useAuth";
 import HeaderModal from "../../Components/Modal/HeaderModal/HeaderModal";
@@ -70,9 +70,11 @@ const Header = () => {
               </ul>
             </div>
             <Link to={"/"}>
-              <div className="flex flex-col items-center cursor-pointer bg-black p-3  bg-opacity-40 rounded-full hover:bg-opacity-60">
-                <p className="text-[#fb8300] font-bold text-3xl">Zero</p>
-                <p className="text-white font-medium">Hunger</p>
+              <div className="flex items-center gap-3">
+                <img className="w-20 h-[20]" src={logo} alt="" />
+                <p className="text-3xl font-bold">
+                  Zero <span className="text-gray-800  text-3xl ">Hunger</span>
+                </p>
               </div>
             </Link>
           </div>

@@ -7,6 +7,7 @@ import DonorStatsInfo from "../../../Components/Dashboard/DonorMenu/DonorStatsIn
 import DonorStatusPieChart from "../../../Components/Dashboard/DonorMenu/DonorStatusPieChart";
 import Loader from "../../../Components/Loader/Loader";
 import DonorCategoryBarChart from "./DonorCategoryBarChart";
+import ProfileText from "../../../Components/ProfileText/ProfileText";
 
 const DonorProfile = () => {
   const axios = useAxios();
@@ -39,16 +40,17 @@ const DonorProfile = () => {
         <Loader></Loader>
       ) : (
         <div>
+          <ProfileText></ProfileText>
           <DonorStatsInfo
             totalRecipient={stats?.totalRecipient}
             totalFood={stats?.totalFood}
             totalDelivered={stats?.delivered}
           ></DonorStatsInfo>
-          <div className="grid grid-cols-5 gap-12">
-            <div className="col-span-3">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            <div className="  lg:col-span-3">
               <DonorCategoryBarChart data={barData}></DonorCategoryBarChart>
             </div>
-            <div className="col-span-2">
+            <div className="lg:col-span-2">
               <DonorStatusPieChart data={pieData}></DonorStatusPieChart>
             </div>
           </div>

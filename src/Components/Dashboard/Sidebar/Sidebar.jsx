@@ -21,9 +21,9 @@ const Sidebar = () => {
       {isLoading ? (
         <Loader></Loader>
       ) : (
-        <div className="mt-28   ">
+        <div className=" mt-8 md:mt-16 lg:mt-28   ">
           <div className="flex justify-center items-center mb-12">
-            <img className="w-44 h-32" src={logo} alt="" />
+            <img className="w-28 h-28" src={logo} alt="" />
           </div>
           <div className="    text-white flex flex-col    ">
             {/* upper side */}
@@ -32,10 +32,8 @@ const Sidebar = () => {
               {user && role === "donor" && (
                 <RoleSelectorButton></RoleSelectorButton>
               )}
-              {/* 
-        
 
-          {user && role === "admin" && <AdminMenu></AdminMenu>} */}
+              {user && role === "admin" && <AdminMenu></AdminMenu>}
             </div>
             <div className="divider divider-warning "></div>
             {/* lower side */}

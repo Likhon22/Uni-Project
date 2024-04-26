@@ -21,6 +21,10 @@ import DonorRouter from "./DonorRouter";
 import AdminRouter from "./AdminRouter";
 import UpdateFood from "../Pages/Dashboard/DonorPage/UpdateFood";
 import ManageRequestedFood from "../Pages/Dashboard/DonorPage/ManageRequestedFood";
+import ManageAdminFood from "../Pages/Dashboard/AdminPage/ManageAdminFood";
+import ManageUsers from "../Pages/Dashboard/AdminPage/ManageUsers";
+import UserRating from "../Pages/Dashboard/UserPage/UserRating";
+import AdminManageRating from "../Pages/Dashboard/AdminPage/AdminManageRating";
 const axios = useAxios();
 
 const router = createBrowserRouter([
@@ -81,6 +85,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "user-rating",
+        element: (
+          <UserRouter>
+            <UserRating></UserRating>
+          </UserRouter>
+        ),
+      },
+      {
         path: "order-status",
         element: (
           <UserRouter>
@@ -136,6 +148,30 @@ const router = createBrowserRouter([
         element: (
           <AdminRouter>
             <AdminProfile></AdminProfile>
+          </AdminRouter>
+        ),
+      },
+      {
+        path: "manage-admin-food",
+        element: (
+          <AdminRouter>
+            <ManageAdminFood></ManageAdminFood>
+          </AdminRouter>
+        ),
+      },
+      {
+        path: "manage-users",
+        element: (
+          <AdminRouter>
+            <ManageUsers></ManageUsers>
+          </AdminRouter>
+        ),
+      },
+      {
+        path: "manage-rating",
+        element: (
+          <AdminRouter>
+            <AdminManageRating></AdminManageRating>
           </AdminRouter>
         ),
       },

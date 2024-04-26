@@ -75,7 +75,7 @@ const UpdateFood = () => {
         <div className="bg-gradient-to-r from-cyan-500 to-blue-500  w-1/2 mx-auto py-20 rounded-lg">
           <h2 className="text-center text-white text-4xl font-bold mb-4">
             {" "}
-            Add Your Food
+            Update Your Food
           </h2>
           <form onSubmit={handleSubmit} className="w-1/2 mx-auto  ">
             <div className="form-control">
@@ -171,7 +171,7 @@ const UpdateFood = () => {
                 <span className="text-white">Additional Notes</span>
               </label>
               <input
-                defaultValue={food?.data?.notes}
+                defaultValue={food?.data?.additional_notes}
                 type="text"
                 placeholder="Additional Notes"
                 className="input input-bordered"

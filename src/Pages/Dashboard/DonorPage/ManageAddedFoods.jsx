@@ -6,6 +6,7 @@ import Loader from "../../../Components/Loader/Loader";
 import useAxios from "../../../hooks/useAxios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import HeadingText from "../../../HeadingText/HeadingText";
 
 const ManageAddedFoods = () => {
   const axios = useAxios();
@@ -37,7 +38,7 @@ const ManageAddedFoods = () => {
         refetch();
         Swal.fire({
           title: "Deleted!",
-          text: "Your property has been deleted.",
+          text: "Your food has been deleted.",
           icon: "success",
         });
       }
@@ -64,7 +65,13 @@ const ManageAddedFoods = () => {
               </p>
             ) : (
               <div>
-                <table className="table ">
+                <HeadingText
+                  heading={"Donated Food Route Management"}
+                  subHeading={
+                    "Organize, Track, and Distribute Donated Food Supplies"
+                  }
+                ></HeadingText>
+                <table className="table mt-12 ">
                   {/* head */}
                   <thead>
                     <tr className=" text-center bg-black text-white text-[16px]">

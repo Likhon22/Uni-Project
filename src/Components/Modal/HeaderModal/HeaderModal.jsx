@@ -47,9 +47,11 @@ const HeaderModal = ({ isOpen, closeModal }) => {
                         alt=""
                       />
                       <div className="mt-12 text-white flex flex-col items-center ">
-                        <p className="font-medium text-lg ">{user?.username}</p>
+                        <p className="font-medium text-lg capitalize ">
+                          {user?.username}
+                        </p>
                         <p className="text-sm">{user?.email}</p>
-                        <p>{user?.role}</p>
+                        <p className="capitalize">{user?.role}</p>
                       </div>
                     </div>
                     <div className="flex justify-center row-span-2  bg-cyan-400 ">

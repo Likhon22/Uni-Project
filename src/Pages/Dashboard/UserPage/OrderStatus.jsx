@@ -5,6 +5,7 @@ import DashboardContainer from "../../../Components/DashboardContainer";
 import useAuth from "../../../hooks/useAuth";
 import useAxios from "../../../hooks/useAxios";
 import Swal from "sweetalert2";
+import HeadingText from "../../../HeadingText/HeadingText";
 
 const OrderStatus = () => {
   const { user } = useAuth();
@@ -69,7 +70,13 @@ const OrderStatus = () => {
               </p>
             ) : (
               <div>
-                <table className="table ">
+                <HeadingText
+                  heading={"Requested Food List and Status Tracker"}
+                  subHeading={
+                    "Monitor the Status of Your Food Requests and Track Your Requested Items"
+                  }
+                ></HeadingText>
+                <table className="table mt-12 ">
                   {/* head */}
                   <thead>
                     <tr className=" text-center bg-black text-white text-[16px]">

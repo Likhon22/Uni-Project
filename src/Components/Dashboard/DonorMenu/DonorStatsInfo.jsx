@@ -4,7 +4,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 
 const DonorStatsInfo = ({ totalRecipient, totalFood, totalDelivered }) => {
   return (
-    <div className="bg-gray-100 w-full mb-16 grid justify-center md:grid-cols-3 gap-12 ">
+    <div className="bg-gray-100 w-full mb-16 grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 ">
       <div className="bg-[#ffffff]  shadow-lg h-[200px] rounded-lg flex items-center justify-between px-6">
         <div className="flex flex-col items-center">
           <p className="text-gray-500 text-lg">Total Donated Food</p>

@@ -7,6 +7,7 @@ import useAxios from "../../../hooks/useAxios";
 import VerifiedUpdateModal from "../../../Modal/VerifiedUpdateModal";
 
 import Swal from "sweetalert2";
+import HeadingText from "../../../HeadingText/HeadingText";
 
 const ManageRequestedFood = () => {
   const { user } = useAuth();
@@ -72,7 +73,13 @@ const ManageRequestedFood = () => {
               </p>
             ) : (
               <div>
-                <table className="table ">
+                <HeadingText
+                  heading={" Donor Request Management"}
+                  subHeading={
+                    "Track and Fulfill User Requests for Donated Food"
+                  }
+                ></HeadingText>
+                <table className="table mt-12 ">
                   {/* head */}
                   <thead>
                     <tr className=" text-center bg-black text-white text-[16px]">
@@ -149,7 +156,10 @@ const ManageRequestedFood = () => {
                           <button
                             onClick={() => handleDelete(food?.food_id)}
                             className="btn btn-sm bg-red-600 text-white hover:bg-black "
-                            disabled={food?.status === "accepted"}
+                            disabled={
+                              food?.status === "accepted" ||
+                              food?.status === "delivered"
+                            }
                           >
                             Delete
                           </button>

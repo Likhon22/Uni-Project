@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import Container from "../../Components/Container";
 import useAxios from "../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
@@ -7,13 +7,14 @@ import Loader from "../../Components/Loader/Loader";
 import useAuth from "./../../hooks/useAuth";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import useRole from "../../hooks/useRole";
 
 const CategoryDetails = () => {
   const axios = useAxios();
   const { user } = useAuth();
   const [sort, setSort] = useState("default");
   const { category } = useParams();
-
+  const [role] = useRole();
   const {
     data: foods = [],
     isLoading,
@@ -87,7 +88,7 @@ const CategoryDetails = () => {
       {isLoading ? (
         <Loader></Loader>
       ) : (
-        <div className=" my-24 ">
+        <div className=" mt-24 mb-36 ">
           <div className="flex justify-end">
             <select
               className="select select-info w-full max-w-xs "
@@ -167,13 +168,32 @@ const CategoryDetails = () => {
                       </p>
                     )}
                     <div className="card-actions justify-center mt-4">
-                      <button
-                        disabled={food?.status !== "Available"}
-                        onClick={() => handleAdd(food)}
-                        className="btn btn-accent mt-4 text-white"
-                      >
-                        Add to Wishlist
-                      </button>
+                      {role === "admin" ? (
+                        <Link to={"/dashboard/manage-admin-food"}>
+                          <button className="btn mt-4 bg-gray-700  text-white hover:bg-black border-none">
+                            Manage Food
+                          </button>
+                        </Link>
+                      ) : (
+                        <div>
+                          {user?.email !== food?.email ? (
+                            <button
+                              disabled={food?.status !== "Available"}
+                              onClick={() => handleAdd(food)}
+                              className="btn btn-accent mt-4 text-white"
+                            >
+                              Add to Wishlist
+                            </button>
+                          ) : (
+                            <Link to={"/dashboard/manage-added-foods"}>
+                              <button className="btn mt-4 bg-gray-700  text-white hover:bg-black border-none">
+                                {" "}
+                                Manage Food
+                              </button>
+                            </Link>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

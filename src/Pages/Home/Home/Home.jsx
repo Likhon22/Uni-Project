@@ -1,8 +1,10 @@
 import React from "react";
-import Rating from "../Rating/Rating";
+
 import Banner from "../Banner/Banner";
 import WhyChooseUs from "../../../Components/WhyChooseUS.JSX";
 import SatisfiedSection from "../../../Components/SatisfiedSection/SatisfiedSection";
+
+import Ratings from "../../../Components/Ratings";
 
 const Home = () => {
   return (
@@ -10,7 +12,7 @@ const Home = () => {
       <Banner></Banner>
       <WhyChooseUs></WhyChooseUs>
       <SatisfiedSection></SatisfiedSection>
-      <Rating></Rating>
+      <Ratings></Ratings>
     </div>
   );
 };
