@@ -48,10 +48,14 @@ const DonorProfile = () => {
           ></DonorStatsInfo>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
             <div className="  lg:col-span-3">
-              <DonorCategoryBarChart data={barData}></DonorCategoryBarChart>
+              {barData?.length > 0 && (
+                <DonorCategoryBarChart data={barData}></DonorCategoryBarChart>
+              )}
             </div>
             <div className="lg:col-span-2">
-              <DonorStatusPieChart data={pieData}></DonorStatusPieChart>
+              {pieData?.length > 0 && (
+                <DonorStatusPieChart data={pieData}></DonorStatusPieChart>
+              )}
             </div>
           </div>
         </div>

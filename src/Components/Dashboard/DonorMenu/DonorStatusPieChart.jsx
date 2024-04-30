@@ -23,7 +23,7 @@ const DonorStatusPieChart = ({ data }) => {
   }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + (radius + 35) * Math.sin(-midAngle * RADIAN);
+    const y = cy + (radius + 5) * Math.sin(-midAngle * RADIAN);
 
     return (
       <text
@@ -38,18 +38,18 @@ const DonorStatusPieChart = ({ data }) => {
     );
   };
   return (
-    <div className="bg-white rounded-lg h-[500px] p-12  shadow-md flex flex-col justify-center items-center">
-      <p className="text-lg mb-6 font-medium text-center text-gray-500">
+    <div className="bg-white rounded-lg h-[500px] p-8  shadow-md flex flex-col justify-center items-center">
+      <p className="text-lg mb-6 font-medium text-center text-gray-500 ">
         Percentage of Donated Food Items by Status
       </p>
-      <PieChart width={600} height={400}>
+      <PieChart width={200} height={370}>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
           labelLine={false}
           label={renderCustomizedLabel}
-          outerRadius={150}
+          outerRadius={100}
           fill="#8884d8"
           dataKey="value"
         >

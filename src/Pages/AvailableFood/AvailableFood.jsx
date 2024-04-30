@@ -8,7 +8,7 @@ const AvailableFood = () => {
   return (
     <Container>
       <div className="my-24">
-        <h1 className="font-bold text-4xl mb-12  text-blue-950 text-center">
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-12  text-blue-950 text-center">
           View Donatable Food Categories
         </h1>
         <FoodCategory></FoodCategory>

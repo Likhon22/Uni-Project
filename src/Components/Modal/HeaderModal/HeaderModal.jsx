@@ -2,9 +2,11 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
 import useAuth from "../../../hooks/useAuth";
+import useRole from "../../../hooks/useRole";
 
 const HeaderModal = ({ isOpen, closeModal }) => {
   const { user, logout } = useAuth();
+  const [role] = useRole();
 
   const handleLogout = async () => {
     await logout();
@@ -51,7 +53,7 @@ const HeaderModal = ({ isOpen, closeModal }) => {
                           {user?.username}
                         </p>
                         <p className="text-sm">{user?.email}</p>
-                        <p className="capitalize">{user?.role}</p>
+                        <p className="capitalize">{role}</p>
                       </div>
                     </div>
                     <div className="flex justify-center row-span-2  bg-cyan-400 ">

@@ -11,12 +11,12 @@ import {
 } from "recharts";
 const DonorCategoryBarChart = ({ data }) => {
   return (
-    <div className="bg-white rounded-lg h-[500px] p-12  shadow-md">
+    <div className="bg-white rounded-lg flex flex-col items-center h-[500px] p-12  shadow-md">
       <p className="text-lg mb-6 font-medium text-center text-gray-500">
         Recipient Food Requests by Category
       </p>
       <BarChart
-        width={500}
+        width={350}
         height={370}
         data={data}
         margin={{

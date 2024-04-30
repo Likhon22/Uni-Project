@@ -50,7 +50,7 @@ const Ratings = () => {
 
                     <div className="flex items-center gap-1">
                       <IoTime className="text-xl text-gray-900" />
-                      <p>{moment(rating.date).fromNow(true)}</p>
+                      <p>{moment(rating.date).fromNow()}</p>
                     </div>
                   </div>
                 </div>
