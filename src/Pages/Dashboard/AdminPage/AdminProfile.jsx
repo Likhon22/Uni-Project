@@ -13,11 +13,13 @@ const AdminProfile = () => {
   const { data: adminStats, isLoading } = useQuery({
     queryKey: "adminStats",
     queryFn: async () => {
-      const res = await axios.get("/admin-stats");
+      const res = await axios.get("/users/admin-stats");
 
       return res.data;
     },
   });
+  console.log(adminStats);
+
   const barData =
     adminStats &&
     adminStats?.results &&

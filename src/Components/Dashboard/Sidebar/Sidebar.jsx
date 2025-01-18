@@ -21,11 +21,11 @@ const Sidebar = () => {
       {isLoading ? (
         <Loader></Loader>
       ) : (
-        <div className=" mt-8 md:mt-16 lg:mt-28   ">
+        <div className=" mt-8 md:mt-16 lg:mt-28 fixed    ">
           <div className="flex justify-center items-center mb-12">
             <img className="w-28 h-28" src={logo} alt="" />
           </div>
-          <div className="    text-white flex flex-col    ">
+          <div className="    text-white flex flex-col     ">
             {/* upper side */}
             <div className="mb-5 pl-12">
               {user && role === "user" && <UserMenu></UserMenu>}

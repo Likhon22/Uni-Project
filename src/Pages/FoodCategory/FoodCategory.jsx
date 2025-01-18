@@ -13,7 +13,7 @@ const FoodCategory = () => {
   } = useQuery({
     queryKey: ["foodCategory"],
     queryFn: async () => {
-      const response = axios.get("/unique-categories");
+      const response = axios.get("/foods/unique-categories");
       return (await response).data;
     },
   });

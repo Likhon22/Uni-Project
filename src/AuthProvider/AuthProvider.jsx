@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
   const register = async (username, email, userImage, password, role) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("/register", {
+      const response = await axios.post("/auth/register", {
         username,
         email,
         password,
@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
   const login = async (email, password, username, userImage, role) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("/login", {
+      const response = await axios.post("/auth/login", {
         email,
         password,
         username,
@@ -71,7 +71,7 @@ const AuthProvider = ({ children }) => {
   const logout = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post("/logout");
+      const response = await axios.post("/auth/logout");
       setUser(null);
       console.log(response.data.message); // Log the logout message
     } catch (error) {

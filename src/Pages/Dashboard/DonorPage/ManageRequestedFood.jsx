@@ -53,7 +53,7 @@ const ManageRequestedFood = () => {
   } = useQuery({
     queryKey: ["requestedFoods", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`manage-food/donor/${user?.email}`);
+      const res = await axios.get(`/manage-food/donor/${user?.email}`);
       return res.data;
     },
   });

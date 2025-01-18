@@ -16,7 +16,7 @@ const AdminAvgExpireDate = ({ data }) => {
       </p>
 
       <AreaChart
-        width={1100}
+        width={800}
         height={400}
         data={data}
         margin={{

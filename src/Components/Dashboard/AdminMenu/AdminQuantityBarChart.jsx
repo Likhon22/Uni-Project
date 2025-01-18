@@ -17,7 +17,7 @@ const AdminQuantityBarChart = ({ data }) => {
       x + width / 2
     },${y + height / 3}
   ${x + width / 2}, ${y}
-  C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
+  C${x + width / 3},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
       x + width
     }, ${y + height}
   Z`;
@@ -33,7 +33,7 @@ const AdminQuantityBarChart = ({ data }) => {
       <p className="text-lg mb-6 font-medium text-center text-gray-500">
         Total Quantity Added by Donor
       </p>
-      <ResponsiveContainer width={1100} height={400}>
+      <ResponsiveContainer width={800} height={400}>
         {" "}
         <BarChart
           data={data}
@@ -54,7 +54,7 @@ const AdminQuantityBarChart = ({ data }) => {
             shape={<TriangleBar />}
             label={{ position: "top" }}
           >
-            {data.map((entry, index) => (
+            {data?.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % 20]} />
             ))}
           </Bar>

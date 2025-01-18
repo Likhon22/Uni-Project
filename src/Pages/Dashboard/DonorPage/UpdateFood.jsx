@@ -15,7 +15,7 @@ const UpdateFood = () => {
   const { data: foods = [] } = useQuery({
     queryKey: ["foods", selectedCategory],
     queryFn: async () => {
-      const res = await axios.get("/unique-categories");
+      const res = await axios.get("/foods/unique-categories");
       return res.data;
     },
   });

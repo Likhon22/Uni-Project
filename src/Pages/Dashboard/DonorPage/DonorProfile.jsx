@@ -15,7 +15,7 @@ const DonorProfile = () => {
   const { data: stats, isLoading } = useQuery({
     queryKey: ["donor-stats", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`/donor-stats/${user?.email}`);
+      const res = await axios.get(`/users/donor-stats/${user?.email}`);
       return res.data;
     },
   });

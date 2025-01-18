@@ -19,7 +19,7 @@ const ManageAddedFoods = () => {
   } = useQuery({
     queryKey: ["foods"],
     queryFn: async () => {
-      const res = await axios.get(`foods/donor/${user?.email}`);
+      const res = await axios.get(`/foods/donor/${user?.email}`);
       return res.data;
     },
   });

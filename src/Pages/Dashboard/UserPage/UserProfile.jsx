@@ -12,7 +12,7 @@ const UserProfile = () => {
   const { data: stat, isLoading } = useQuery({
     queryKey: ["user-stats"],
     queryFn: async () => {
-      const res = await axios.get(`/user-stats/${user?.email}`);
+      const res = await axios.get(`/users/user-stats/${user?.email}`);
       return res.data;
     },
   });

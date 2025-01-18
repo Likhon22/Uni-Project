@@ -12,7 +12,7 @@ const UserStatsInfo = ({
   console.log(totalAccepted, totalDelivered, totalRejected, totalRequested);
   return (
     <div>
-      <div className="bg-gray-100 w-full p-12 grid justify-center md:grid-cols-2 lg:grid-cols-4 gap-8 ">
+      <div className="bg-gray-100 w-full p-12 grid justify-center md:grid-cols-2 lg:grid-cols-3 px-4 gap-8 ">
         <div className="bg-[#ffffff]  shadow-lg w-[300px] h-[150px] rounded-lg flex items-center justify-between px-6">
           <div className="flex flex-col items-center">
             <p className="text-gray-500 text-lg">Requested</p>
